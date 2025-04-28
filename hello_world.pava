@@ -1,7 +1,24 @@
 # hello_world.pava
 
-String text = "Hello world" 
-print(text)
+# String text = "Hello world" 
+# print(text)
 
 Int number = 4
 print(number)
+
+Int number1 = 7
+print(number1)
+
+number3 = number + number1
+print(number3)
+
+print()
+
+String word = "Hello "
+print(word)
+
+String word1 = "world"
+print(word1)
+
+word3 = word + word1
+print(word3)
