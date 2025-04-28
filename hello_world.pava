@@ -1,0 +1,4 @@
+# hello_world.pava
+
+String text = "Hello world" 
+print(text)
