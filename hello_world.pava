@@ -15,8 +15,6 @@ print(number3)
 number4 = number - number1
 print(number4)
 
-print()
-
 String word = "Hello "
 print(word)
 
