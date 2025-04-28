@@ -1,5 +1,7 @@
 # pava.py
 
+from typing import Any, Callable
+
 import sys
 import os
 import re
@@ -16,6 +18,16 @@ class String:
     def __str__(self):
         return self.__value
 
+class Int:
+    __slots__ = ('__value')
+    def __init__(self, value: str):
+        if test := re.match(r'\D+', value):
+            raise ValueError(f"Invalid integer format: {value}")
+        else:
+            self.__value = int(value)
+
+    def __str__(self):
+        return str(self.__value)
 
 SUPPORTED_TYPES = {
     'String' : String
@@ -26,7 +38,8 @@ SUPPORTED_FUNCTIONS = {
 }
 
 def run_pava_code(filepath: os.PathLike) -> None:
-    variables = {}
+    variables: dict[str, Any] = {}
+    functions: dict[str, Callable] = SUPPORTED_FUNCTIONS.copy()
 
     with open(filepath, 'r') as file:
         lines = file.readlines()
@@ -56,7 +69,7 @@ def run_pava_code(filepath: os.PathLike) -> None:
         if match:
             func_name, args = match.groups()
 
-            if func_name in SUPPORTED_FUNCTIONS:
+            if func_name in functions:
                 # Split arguments by comma and strip whitespace
                 args = [arg.strip() for arg in args.split(',')]
 
@@ -67,7 +80,7 @@ def run_pava_code(filepath: os.PathLike) -> None:
                         break
                 else:
                     # Call the function with the variables as arguments
-                    SUPPORTED_FUNCTIONS[func_name](*[variables[arg] for arg in args])
+                    functions[func_name](*[variables[arg] for arg in args])
             else:
                 print(f"Error: unknown function '{func_name}'")
 

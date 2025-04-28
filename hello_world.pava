@@ -2,3 +2,6 @@
 
 String text = "Hello world" 
 print(text)
+
+Int number = 4
+print(number)
