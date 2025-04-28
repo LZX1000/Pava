@@ -4,22 +4,26 @@ import sys
 import os
 import re
 
-def prepare_string(value: str) -> str:
-    # Remove quotes if it's a string
-    if (value.startswith('"') and value.endswith('"') or value.startswith("'") and value.endswith("'")):
-        return value[1:-1]
-    else:
-        raise ValueError(f"Invalid string format: {value}")
+class String:
+    __slots__ = ('__value')
+    def __init__(self, value: str):
+        # Remove quotes if it's a string
+        if (value.startswith('"') and value.endswith('"') or value.startswith("'") and value.endswith("'")):
+            self.__value = value[1:-1]
+        else:
+            raise ValueError(f"Invalid string format: {value}")
+
+    def __str__(self):
+        return self.__value
 
 
 SUPPORTED_TYPES = {
-    'String' : prepare_string
+    'String' : String
 }
 
 SUPPORTED_FUNCTIONS = {
     'print' : print
 }
-
 
 def run_pava_code(filepath: os.PathLike) -> None:
     variables = {}
