@@ -7,7 +7,7 @@ import os
 import re
 
 class String:
-    __slots__ = ('__value')
+    __slots__ = ('__value', )
     def __init__(self, value: str, passed: bool = False):
         # Remove quotes if it's a string
         if (value.startswith('"') and value.endswith('"') or value.startswith("'") and value.endswith("'")):
@@ -20,11 +20,16 @@ class String:
     def __add__(self, other):
         return self.__value + other.__value
 
+    def __sub__(self, other):
+        for char in other.__value:
+            self.__value = self.__value.replace(char, '', 1)
+        return self.__value
+
     def __str__(self):
         return self.__value
 
 class Int:
-    __slots__ = ('__value')
+    __slots__ = ('__value', )
     def __init__(self, value: str, passed: bool = False):
         if not passed:
             # Check if the value is a valid integer
@@ -35,6 +40,9 @@ class Int:
 
     def __add__(self, other):
         return self.__value + other.__value
+
+    def __sub__(self, other):
+        return self.__value - other.__value
 
     def __str__(self):
         return str(self.__value)
@@ -50,6 +58,7 @@ SUPPORTED_FUNCTIONS = {
 
 SUPPORTED_OPERATORS = {
     '+' : lambda x, y: x + y,
+    '-' : lambda x, y: x - y
 }
 
 

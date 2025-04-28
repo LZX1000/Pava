@@ -12,6 +12,9 @@ print(number1)
 number3 = number + number1
 print(number3)
 
+number4 = number - number1
+print(number4)
+
 print()
 
 String word = "Hello "
@@ -22,3 +25,6 @@ print(word1)
 
 word3 = word + word1
 print(word3)
+
+word4 = word - word1
+print(word4)
